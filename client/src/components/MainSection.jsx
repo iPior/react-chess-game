@@ -1,4 +1,5 @@
 import GameBoard from "./GameBoard"
+import axios from 'axios'
 import { useState, useEffect } from "react"
 
 // import.meta.env.REACT_APP_VITE_
@@ -9,6 +10,15 @@ export default function MainSection() {
   const [playersTurn, setPlayersTurn] = useState(true)
   const [isGameWon, setIsGameWon] = useState(false)
   const [isGameDrawn, setIsGameDrawn] = useState(false)
+
+  const fetchAPI = async () => {
+    const response = await axios.get("http://localhost:8080/api/claude");
+    console.log(response.data.message);
+  }
+
+  useEffect(() => {
+    fetchAPI()
+  }, [])
 
   useEffect(() => {
     checkDraw()
